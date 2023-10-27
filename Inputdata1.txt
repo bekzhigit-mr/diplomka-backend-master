@@ -1,0 +1,6 @@
+ &PARAM
+ WIDTHDIM        =   100.0000    ,
+ STARTPOINT      =  0.0000000E+00,
+ BETA    =   30.00000    ,
+ JTAB    =         126
+ /

@@ -1,0 +1,12 @@
+ ABDim=   100.000000    
+  number of measuring electrodes=          45
+  MN=   4.44444455E-02
+ max inclination angle in grad,beta=   30.0000000    
+ damba width=   100.000000    
+ Apoint   40.0000000    
+ leftHeight, rightHeight   14.0000000       0.00000000    
+ N=          90 N1=          90 N2=         135 Model            2
+ total number of points Nnodes=         315 N3,N4,N5,N6          90           0          90           0
+ coordinates (x,z) of lower water points   -6.17789698      -14.0253830    
+ ro1,ro2,ro3,ro4 - damb, water,base,leaking:   10.0000000       500.000000       0.00000000       0.00000000    
+ positions of A    0.00000000     -0.332454890      and B    1.91610825      -1.19933551E-11
