@@ -27,12 +27,12 @@ app.get('/api', (req, res) => {
 })
 
 app.get('/api/get-response', async (req, res) => {
-    let typeOfModel = fs.readFileSync('root@185.116.194.87/typeOfModel.txt', {
+    let typeOfModel = fs.readFileSync('/root/diplomka-backend-master/typeOfModel.txt', {
         encoding: 'utf8',
         flag: 'r'
     });
     let XZwater2 = [];
-    fs.createReadStream("root@185.116.194.87/XZwater2.csv")
+    fs.createReadStream("/root/diplomka-backend-master/XZwater2.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -43,7 +43,7 @@ app.get('/api/get-response', async (req, res) => {
         })
 
     let XZwater = [];
-    fs.createReadStream("root@185.116.194.87/XZwater1.csv")
+    fs.createReadStream("/root/diplomka-backend-master/XZwater1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -54,7 +54,7 @@ app.get('/api/get-response', async (req, res) => {
         })
 
     let nuWaterRight = [];
-    fs.createReadStream("root@185.116.194.87/nuWaterRight.csv")
+    fs.createReadStream("/root/diplomka-backend-master/nuWaterRight.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -64,7 +64,7 @@ app.get('/api/get-response', async (req, res) => {
             nuWaterRight.push(row);
         })
     let nuWaterLeft = [];
-    fs.createReadStream("root@185.116.194.87/nuWaterLeft.csv")
+    fs.createReadStream("/root/diplomka-backend-master/nuWaterLeft.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -74,7 +74,7 @@ app.get('/api/get-response', async (req, res) => {
             nuWaterLeft.push(row);
         })
     let nuxy = [];
-    fs.createReadStream("root@185.116.194.87/nuxy1.csv")
+    fs.createReadStream("/root/diplomka-backend-master/nuxy1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -84,7 +84,7 @@ app.get('/api/get-response', async (req, res) => {
             nuxy.push(row);
         })
     let nuxk = [];
-    fs.createReadStream("root@185.116.194.87/nuxk.csv")
+    fs.createReadStream("/root/diplomka-backend-master/nuxk.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -94,7 +94,7 @@ app.get('/api/get-response', async (req, res) => {
             nuxk.push(row);
         })
     let Roka = [];
-    fs.createReadStream("root@185.116.194.87/Roka1.csv")
+    fs.createReadStream("/root/diplomka-backend-master/Roka1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -104,7 +104,7 @@ app.get('/api/get-response', async (req, res) => {
             Roka.push(row);
         })
     let XZsurface = [];
-    fs.createReadStream("root@185.116.194.87/XZsurface.csv")
+    fs.createReadStream("/root/diplomka-backend-master/XZsurface.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -114,7 +114,7 @@ app.get('/api/get-response', async (req, res) => {
             XZsurface.push(row);
         })
     let electrodes = [];
-    return fs.createReadStream("root@185.116.194.87/Electrodes.csv")
+    return fs.createReadStream("/root/diplomka-backend-master/Electrodes.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -151,7 +151,7 @@ app.post('/api/calculate', (req, res) => {
     const nks = +req.body.nks;
     const heightOfWaterAtLeftSide = +req.body.heightOfWaterAtLeftSide;
     const heightOfWaterAtRightSide = +req.body.heightOfWaterAtRightSide;
-    let fortranCodes = spawn('root@185.116.194.87/a.out', []);
+    let fortranCodes = spawn('/root/diplomka-backend-master/a.out', []);
     let dataResult = []
     let inputTimeout;
 
@@ -192,7 +192,7 @@ app.post('/api/calculate', (req, res) => {
     return fortranCodes.on('close', (code) => {
         // Handle exit code of the Fortran program
         console.log(`child process exited with code ${code}`);
-        fs.writeFileSync('root@185.116.194.87/typeOfModel.txt', typeOfModel.toString());
+        fs.writeFileSync('/root/diplomka-backend-master/typeOfModel.txt', typeOfModel.toString());
         let dataForResponse = {
             data: dataResult,
             _success: true,
