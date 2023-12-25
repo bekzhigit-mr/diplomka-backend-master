@@ -152,7 +152,7 @@ app.post('/api/calculate', (req, res) => {
     const nks = +req.body.nks;
     const heightOfWaterAtLeftSide = +req.body.heightOfWaterAtLeftSide;
     const heightOfWaterAtRightSide = +req.body.heightOfWaterAtRightSide;
-    let fortranCodes = spawn('a.out', []);
+    let fortranCodes = spawn('/home/hadmin/diplomka-backend-master/a.out', []);
     let dataResult = []
     let inputTimeout;
 
