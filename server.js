@@ -188,7 +188,11 @@ app.post('/api/calculate', (req, res) => {
     fortranCodes.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
+
+    console.log("IT WORKs")
     return fortranCodes.on('close', (code) => {
+        console.log("IT WORKs ", code)
+
         // Handle exit code of the Fortran program
         console.log(`child process exited with code ${code}`);
         fs.writeFileSync('typeOfModel.txt', typeOfModel.toString());
@@ -196,6 +200,8 @@ app.post('/api/calculate', (req, res) => {
             data: dataResult,
             _success: true,
         }
+        console.log("IT WORKs ui")
+
         return res.json(dataForResponse);
     });
 
