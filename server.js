@@ -7,7 +7,7 @@ const multer = require('multer'); // npm package for handling file uploads
 const {
     spawn
 } = require('node:child_process');
-const fs = require('fs')
+const fs = require('fs');
 const {
     parse
 } = require("csv-parse");
