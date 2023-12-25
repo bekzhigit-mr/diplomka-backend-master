@@ -181,6 +181,8 @@ app.post('/api/calculate', (req, res) => {
         setInputTimeout(50, heightOfWaterAtRightSide);
     }
 
+    console.log("I m workign  121312")
+
 
     fortranCodes.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
