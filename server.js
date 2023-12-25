@@ -182,12 +182,23 @@ app.post('/api/calculate', (req, res) => {
 
     fortranCodes.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
-        dataResult.push(data.toString());
+        dataResult.push(...data.toString().split('\n'));
     });
 
     fortranCodes.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
+
+    if (fortranCodes.stderr) {
+        fortranCodes.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+            // Log stderr output to a file if needed
+            fs.appendFileSync('stderr.log', data.toString());
+        });
+    } else {
+        console.error('stderr stream not available for the child process.');
+    }
+
 
     console.log("IT WORKs")
     return fortranCodes.on('close', (code) => {
