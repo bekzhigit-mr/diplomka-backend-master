@@ -145,6 +145,7 @@ app.get('/api/get-response', async (req, res) => {
 
 
 app.post('/api/calculate', (req, res) => {
+    console.log("I m workign")
     const AbMetres = +req.body.AbMetres;
     const reliefStartPoint = +req.body.reliefStartPoint;
     const typeOfModel = +req.body.typeOfModel;
