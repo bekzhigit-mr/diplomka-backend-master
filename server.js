@@ -145,7 +145,6 @@ app.get('/api/get-response', async (req, res) => {
 
 
 app.post('/api/calculate', (req, res) => {
-    console.log("I m workign")
     const AbMetres = +req.body.AbMetres;
     const reliefStartPoint = +req.body.reliefStartPoint;
     const typeOfModel = +req.body.typeOfModel;
@@ -153,7 +152,7 @@ app.post('/api/calculate', (req, res) => {
     const heightOfWaterAtLeftSide = +req.body.heightOfWaterAtLeftSide;
     const heightOfWaterAtRightSide = +req.body.heightOfWaterAtRightSide;
     let fortranCodes = spawn('/home/hadmin/diplomka-backend-master/a.out', []);
-    let dataResult = []
+    let dataResult = [];
     let inputTimeout;
 
     const sendInput = (input) => {
@@ -180,9 +179,6 @@ app.post('/api/calculate', (req, res) => {
         setInputTimeout(50, heightOfWaterAtLeftSide);
         setInputTimeout(50, heightOfWaterAtRightSide);
     }
-
-    console.log("I m workign  121312")
-
 
     fortranCodes.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
