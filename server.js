@@ -192,7 +192,7 @@ app.post('/api/calculate', (req, res) => {
     return fortranCodes.on('close', (code) => {
         // Handle exit code of the Fortran program
         console.log(`child process exited with code ${code}`);
-        fs.writeFileSync('/root/diplomka-backend-master/typeOfModel.txt', typeOfModel.toString());
+        fs.writeFileSync('typeOfModel.txt', typeOfModel.toString());
         let dataForResponse = {
             data: dataResult,
             _success: true,
