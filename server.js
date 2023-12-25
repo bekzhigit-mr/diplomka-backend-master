@@ -27,12 +27,12 @@ app.get('/api', (req, res) => {
 })
 
 app.get('/api/get-response', async (req, res) => {
-    let typeOfModel = fs.readFileSync('/root/diplomka-backend-master/typeOfModel.txt', {
+    let typeOfModel = fs.readFileSync('typeOfModel.txt', {
         encoding: 'utf8',
         flag: 'r'
     });
     let XZwater2 = [];
-    fs.createReadStream("/root/diplomka-backend-master/XZwater2.csv")
+    fs.createReadStream("XZwater2.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -43,7 +43,7 @@ app.get('/api/get-response', async (req, res) => {
         })
 
     let XZwater = [];
-    fs.createReadStream("/root/diplomka-backend-master/XZwater1.csv")
+    fs.createReadStream("XZwater1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -54,7 +54,7 @@ app.get('/api/get-response', async (req, res) => {
         })
 
     let nuWaterRight = [];
-    fs.createReadStream("/root/diplomka-backend-master/nuWaterRight.csv")
+    fs.createReadStream("nuWaterRight.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -64,7 +64,7 @@ app.get('/api/get-response', async (req, res) => {
             nuWaterRight.push(row);
         })
     let nuWaterLeft = [];
-    fs.createReadStream("/root/diplomka-backend-master/nuWaterLeft.csv")
+    fs.createReadStream("nuWaterLeft.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -74,7 +74,7 @@ app.get('/api/get-response', async (req, res) => {
             nuWaterLeft.push(row);
         })
     let nuxy = [];
-    fs.createReadStream("/root/diplomka-backend-master/nuxy1.csv")
+    fs.createReadStream("nuxy1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -84,7 +84,7 @@ app.get('/api/get-response', async (req, res) => {
             nuxy.push(row);
         })
     let nuxk = [];
-    fs.createReadStream("/root/diplomka-backend-master/nuxk.csv")
+    fs.createReadStream("nuxk.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 1
@@ -94,7 +94,7 @@ app.get('/api/get-response', async (req, res) => {
             nuxk.push(row);
         })
     let Roka = [];
-    fs.createReadStream("/root/diplomka-backend-master/Roka1.csv")
+    fs.createReadStream("Roka1.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -104,7 +104,7 @@ app.get('/api/get-response', async (req, res) => {
             Roka.push(row);
         })
     let XZsurface = [];
-    fs.createReadStream("/root/diplomka-backend-master/XZsurface.csv")
+    fs.createReadStream("XZsurface.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -114,7 +114,7 @@ app.get('/api/get-response', async (req, res) => {
             XZsurface.push(row);
         })
     let electrodes = [];
-    return fs.createReadStream("/root/diplomka-backend-master/Electrodes.csv")
+    return fs.createReadStream("Electrodes.csv")
         .pipe(parse({
             delimiter: ",",
             from_line: 2
@@ -151,7 +151,7 @@ app.post('/api/calculate', (req, res) => {
     const nks = +req.body.nks;
     const heightOfWaterAtLeftSide = +req.body.heightOfWaterAtLeftSide;
     const heightOfWaterAtRightSide = +req.body.heightOfWaterAtRightSide;
-    let fortranCodes = spawn('/root/diplomka-backend-master/a.out', []);
+    let fortranCodes = spawn('a.out', []);
     let dataResult = []
     let inputTimeout;
 
