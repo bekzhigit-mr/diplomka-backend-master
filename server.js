@@ -155,7 +155,11 @@ app.post('/api/calculate', (req, res) => {
     let dataResult = [];
     let inputTimeout;
 
+    fortranCodes.stdout.setEncoding('utf-8');
+    fortranCodes.stdout._maxListeners = 30; // Increase the buffer size
+
     const sendInput = (input) => {
+        console.log(`Sending input: ${input}`);
         fortranCodes.stdin.write(input + '\n');
     };
 
@@ -185,24 +189,17 @@ app.post('/api/calculate', (req, res) => {
         dataResult.push(...data.toString().split('\n'));
     });
 
+    fortranCodes.on('error', (err) => {
+        console.error(`Error in spawning Fortran executable: ${err.message}`);
+    });
+
+
     fortranCodes.stderr.on('data', (data) => {
         console.error(`stderr: ${data}`);
     });
 
-    if (fortranCodes.stderr) {
-        fortranCodes.stderr.on('data', (data) => {
-            console.error(`stderr: ${data}`);
-            // Log stderr output to a file if needed
-            fs.appendFileSync('stderr.log', data.toString());
-        });
-    } else {
-        console.error('stderr stream not available for the child process.');
-    }
-
-
-    console.log("IT WORKs")
     return fortranCodes.on('close', (code) => {
-        console.log("IT WORKs ", code)
+        console.log("Code on Close data: ", code)
 
         // Handle exit code of the Fortran program
         console.log(`child process exited with code ${code}`);
@@ -211,7 +208,7 @@ app.post('/api/calculate', (req, res) => {
             data: dataResult,
             _success: true,
         }
-        console.log("IT WORKs ui")
+        console.log("data For Response: ", dataForResponse)
 
         return res.json(dataForResponse);
     });
